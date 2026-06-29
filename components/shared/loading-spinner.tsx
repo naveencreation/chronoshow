@@ -1,0 +1,21 @@
+import { Loader2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+export function LoadingSpinner({
+  className,
+  size = 'md',
+}: {
+  className?: string;
+  size?: 'sm' | 'md' | 'lg';
+}) {
+  const sizes = { sm: 'h-4 w-4', md: 'h-8 w-8', lg: 'h-12 w-12' };
+  return <Loader2 className={cn('animate-spin text-muted-foreground', sizes[size], className)} />;
+}
+
+export function PageLoading() {
+  return (
+    <div className="flex items-center justify-center py-20">
+      <LoadingSpinner size="lg" />
+    </div>
+  );
+}
