@@ -1,0 +1,145 @@
+import type { Product, Category, Brand, Order, PaginatedResult } from '@/types';
+
+export const mockCategories: Category[] = [
+  {
+    id: 1,
+    name: 'Men',
+    slug: 'men',
+    description: 'Watches for men',
+    sort_order: 1,
+    is_active: true,
+  },
+  {
+    id: 2,
+    name: 'Women',
+    slug: 'women',
+    description: 'Watches for women',
+    sort_order: 2,
+    is_active: true,
+  },
+  {
+    id: 3,
+    name: 'Luxury',
+    slug: 'luxury',
+    description: 'Luxury watches',
+    sort_order: 6,
+    is_active: true,
+  },
+];
+
+export const mockBrands: Brand[] = [
+  { id: 1, name: 'Titan', slug: 'titan', description: 'Indian heritage brand', is_active: true },
+  { id: 2, name: 'Casio', slug: 'casio', description: 'Japanese quality', is_active: true },
+  { id: 3, name: 'Fossil', slug: 'fossil', description: 'Premium fashion', is_active: true },
+];
+
+export const mockProduct: Product = {
+  id: 1,
+  name: 'Titan Edge Classic',
+  slug: 'titan-edge-classic',
+  brand_id: 1,
+  category_id: 1,
+  model_number: 'TE-100',
+  sku: 'TITAN-TE-100',
+  mrp: 10000,
+  selling_price: 7500,
+  discount_percent: 25,
+  description: 'A premium analog watch from Titan.',
+  features: ['Scratch Resistant', 'Water Resistant'],
+  specifications: { movement: 'Quartz', case_material: 'Stainless Steel' },
+  stock_quantity: 10,
+  stock_status: 'in_stock',
+  low_stock_threshold: 5,
+  is_featured: true,
+  is_new_arrival: true,
+  is_trending: false,
+  is_active: true,
+  tags: ['premium', 'classic'],
+  created_at: '2026-06-29T00:00:00Z',
+  updated_at: '2026-06-29T00:00:00Z',
+  brands: { name: 'Titan', slug: 'titan' },
+  categories: { name: 'Men', slug: 'men' },
+  product_images: [
+    {
+      id: 1,
+      product_id: 1,
+      image_url: 'https://example.com/watch1.jpg',
+      public_id: 'watch1',
+      alt_text: 'Titan Edge',
+      sort_order: 0,
+      is_primary: true,
+    },
+    {
+      id: 2,
+      product_id: 1,
+      image_url: 'https://example.com/watch2.jpg',
+      public_id: 'watch2',
+      alt_text: 'Titan Edge Side',
+      sort_order: 1,
+      is_primary: false,
+    },
+  ],
+};
+
+export const mockProducts: Product[] = [
+  mockProduct,
+  {
+    id: 2,
+    name: 'Casio G-Shock',
+    slug: 'casio-g-shock',
+    brand_id: 2,
+    category_id: 7,
+    model_number: 'G-100',
+    sku: 'CASIO-G-100',
+    mrp: 8000,
+    selling_price: 7200,
+    discount_percent: 10,
+    description: 'Rugged digital watch.',
+    features: ['Shock Resistant', '200M Water Resistant'],
+    specifications: { movement: 'Digital', case_material: 'Resin' },
+    stock_quantity: 5,
+    stock_status: 'low_stock',
+    low_stock_threshold: 5,
+    is_featured: false,
+    is_new_arrival: false,
+    is_trending: true,
+    is_active: true,
+    tags: ['sports', 'digital'],
+    created_at: '2026-06-28T00:00:00Z',
+    updated_at: '2026-06-28T00:00:00Z',
+    brands: { name: 'Casio', slug: 'casio' },
+    categories: { name: 'Sports', slug: 'sports' },
+    product_images: [],
+  },
+];
+
+export const mockPaginatedProducts: PaginatedResult<Product> = {
+  data: mockProducts,
+  total: 2,
+  page: 1,
+  limit: 24,
+  totalPages: 1,
+};
+
+export const mockOrder: Order = {
+  id: 1,
+  order_number: 'ORD-TEST-001',
+  customer_name: 'John Doe',
+  customer_phone: '+919876543210',
+  status: 'new',
+  total_amount: 15000,
+  delivery_type: 'store_pickup',
+  created_at: '2026-06-29T00:00:00Z',
+  updated_at: '2026-06-29T00:00:00Z',
+  order_items: [
+    {
+      id: 1,
+      order_id: 1,
+      product_id: 1,
+      product_name: 'Titan Edge Classic',
+      quantity: 2,
+      unit_price: 7500,
+      total_price: 15000,
+    },
+  ],
+};
