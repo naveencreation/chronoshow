@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, User, Menu } from 'lucide-react';
 import { Logo } from '@/components/shared/logo';
 import { SearchBar } from '@/components/shop/search-bar';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { mainNav } from '@/config/navigation';
 import { useState } from 'react';
@@ -21,9 +21,7 @@ export function ShopHeader() {
         <div className="flex items-center gap-6">
           <Sheet>
             <SheetTrigger className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-5 w-5" />
-              </Button>
+              <Menu className="h-5 w-5" />
             </SheetTrigger>
             <SheetContent side="left" className="w-64">
               <nav className="mt-8 flex flex-col gap-4">
@@ -72,16 +70,12 @@ export function ShopHeader() {
             </Button>
           )}
 
-          <Link href="/cart">
-            <Button variant="ghost" size="icon">
-              <ShoppingCart className="h-5 w-5" />
-            </Button>
+          <Link href="/cart" className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
+            <ShoppingCart className="h-5 w-5" />
           </Link>
 
-          <Link href="/profile">
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-            </Button>
+          <Link href="/profile" className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
+            <User className="h-5 w-5" />
           </Link>
         </div>
       </div>
