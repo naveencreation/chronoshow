@@ -40,7 +40,7 @@ export async function proxy(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith('/admin')) {
     if (!user) {
-      return NextResponse.redirect(new URL('/', request.url));
+      return NextResponse.redirect(new URL('/admin-login', request.url));
     }
 
     const { data: profile } = await supabase
