@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoShow · Design Checkup</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .meta { color: #64748b; font-size: 0.875rem; margin-bottom: 2rem; }
+    .score-badge {
+      display: inline-block;
+      background: #f59e0b;
+      color: #0f172a;
+      font-weight: 700;
+      padding: 0.25rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
+    .vitals {
+      display: grid;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .vital {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: #1e293b;
+      border-radius: 8px;
+      border-left: 4px solid transparent;
+    }
+    .vital.healthy { border-left-color: #22c55e; }
+    .vital.watch { border-left-color: #f59e0b; }
+    .vital.critical { border-left-color: #ef4444; }
+    .vital-name { font-weight: 600; font-size: 0.875rem; }
+    .vital-score { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; }
+    .vital-stat {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+    }
+    .vital-stat.healthy { background: #166534; color: #bbf7d0; }
+    .vital-stat.watch { background: #854d0e; color: #fde68a; }
+    .vital-stat.critical { background: #991b1b; color: #fecaca; }
+    section { margin-bottom: 2rem; }
+    section h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    section h2 .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    section h2 .status-dot.healthy { background: #22c55e; }
+    section h2 .status-dot.watch { background: #f59e0b; }
+    section h2 .status-dot.critical { background: #ef4444; }
+    ul { list-style: none; padding-left: 0; }
+    li { padding: 0.25rem 0; color: #94a3b8; font-size: 0.875rem; }
+    li::before { content: "— "; color: #475569; }
+    .prescriptions { background: #1e293b; border-radius: 12px; padding: 1.5rem; }
+    .prescriptions h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+    .prescriptions ol { padding-left: 1.25rem; color: #94a3b8; font-size: 0.875rem; }
+    .prescriptions li { padding: 0.5rem 0; }
+    .prescriptions li::before { content: none; }
+    .prescriptions code { background: #334155; padding: 0.125rem 0.375rem; border-radius: 4px; font-size: 0.8125rem; }
+    .footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #1e293b; color: #475569; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ChronoShow</h1>
+    <p class="meta">Design Checkup · 2026-06-30</p>
+
+    <div class="score-badge">45 / 60 · Watch</div>
+
+    <div class="vitals">
+      <div class="vital watch">
+        <span class="vital-name">Intentionality</span>
+        <span class="vital-stat watch">Watch</span>
+        <span class="vital-score">5/10</span>
+      </div>
+      <div class="vital healthy">
+        <span class="vital-name">Readability</span>
+        <span class="vital-stat healthy">Healthy</span>
+        <span class="vital-score">10/10</span>
+      </div>
+      <div class="vital watch">
+        <span class="vital-name">Usability</span>
+        <span class="vital-stat watch">Watch</span>
+        <span class="vital-score">5/10</span>
+      </div>
+      <div class="vital healthy">
+        <span class="vital-name">Responsiveness</span>
+        <span class="vital-stat healthy">Healthy</span>
+        <span class="vital-score">10/10</span>
+      </div>
+      <div class="vital healthy">
+        <span class="vital-name">Speed</span>
+        <span class="vital-stat healthy">Healthy</span>
+        <span class="vital-score">10/10</span>
+      </div>
+      <div class="vital watch">
+        <span class="vital-name">Accessibility</span>
+        <span class="vital-stat watch">Watch</span>
+        <span class="vital-score">5/10</span>
+      </div>
+    </div>
+
+    <section>
+      <h2><span class="status-dot watch"></span> Intentionality — Watch</h2>
+      <ul>
+        <li>Inconsistent accent labels — "Curated" uses navy while "Collection" and "Just Landed" use gold</li>
+        <li>Category cards use blue nav hover instead of gold accent — a shadcn leftover</li>
+        <li>"View All" links are generic ghost buttons — they don't feel authored</li>
+        <li>Hero hardcodes "Timeless Elegance" instead of using siteConfig.tagline when catalog exists</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="status-dot healthy"></span> Readability — Healthy</h2>
+      <ul>
+        <li>Playfair Display serif headings with proper weight contrast</li>
+        <li>Inter sans body at comfortable sizes</li>
+        <li>JetBrains Mono for all price displays — consistent throughout</li>
+        <li>Strong dark header/footer contrast</li>
+        <li>Typography system coherent from a single source of truth</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="status-dot watch"></span> Usability — Watch</h2>
+      <ul>
+        <li>Theme toggle shows empty span during SSR hydration — visible flash</li>
+        <li>Hamburger menu trigger has no aria-label</li>
+        <li>Search input in header overlay has no visible label</li>
+        <li>Header search icon contrast is borderline (3.5:1 for stroke width)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="status-dot healthy"></span> Responsiveness — Healthy</h2>
+      <ul>
+        <li>Mobile-first grids: products 2→3→4 columns</li>
+        <li>Hamburger menu on mobile, horizontal nav at lg</li>
+        <li>Footer: 2→4 column grid</li>
+        <li>Touch targets ≥44px throughout</li>
+        <li>section-padding utility adjusts by breakpoint</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="status-dot healthy"></span> Speed — Healthy</h2>
+      <ul>
+        <li>32 routes build in ~10s with zero errors</li>
+        <li>Proper Suspense boundaries with ProductCardSkeleton</li>
+        <li>Next.js Image with sizes attribute on all product images</li>
+        <li>No layout shift in rendered HTML</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="status-dot watch"></span> Accessibility — Watch</h2>
+      <ul>
+        <li>No skip-to-content link — keyboard users must tab through header</li>
+        <li>Hamburger trigger has no aria-label</li>
+        <li>Theme toggle causes SSR hydration flash</li>
+        <li>Footer headings skip from h4 without preceding h2/h3 structure</li>
+        <li>prefers-reduced-motion and focus rings are properly configured</li>
+      </ul>
+    </section>
+
+    <div class="prescriptions">
+      <h2>Prescriptions</h2>
+      <ol>
+        <li>Add <code>aria-label="Open navigation menu"</code> to hamburger SheetTrigger</li>
+        <li>Fix theme toggle SSR flash — render Sun icon by default instead of empty span</li>
+        <li>Make section eyebrow labels consistent — all gold</li>
+        <li>Add skip-to-content link to layout</li>
+        <li>Add <code>aria-label</code> or VisuallyHidden label to search input</li>
+      </ol>
+    </div>
+
+    <div class="footer">
+      CommandCode Design Checkup · ChronoShow · Run /design deslop or /design finish next.
+    </div>
+  </div>
+</body>
+</html>

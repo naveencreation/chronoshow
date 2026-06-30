@@ -23,26 +23,30 @@ export function MobileNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background pb-[env(safe-area-inset-bottom,0px)] md:hidden">
       <div className="flex h-16 items-center justify-around">
         {links.map((link) => {
           const isActive = !link.external && pathname === link.href;
-          const Component = link.external ? 'a' : Link;
+          const isWhatsApp = link.external;
 
           return (
-            <Component
+            <Link
               key={link.href}
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener noreferrer' : undefined}
               className={cn(
                 'flex flex-col items-center gap-1 px-3 py-2 text-xs font-medium transition-colors',
-                isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                isWhatsApp
+                  ? 'text-green-600'
+                  : isActive
+                    ? 'text-primary'
+                    : 'text-muted-foreground hover:text-foreground'
               )}
             >
               <link.icon className="h-5 w-5" />
               {link.label}
-            </Component>
+            </Link>
           );
         })}
       </div>

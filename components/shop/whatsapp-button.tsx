@@ -37,7 +37,10 @@ export function WhatsAppButton({ product, variant = 'default' }: WhatsAppButtonP
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(buttonVariants({ variant }), 'gap-2 bg-green-600 hover:bg-green-700')}
+      className={cn(
+        buttonVariants({ variant }),
+        'gap-2 bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90'
+      )}
     >
       <MessageCircle className="h-4 w-4" />
       Order via WhatsApp

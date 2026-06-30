@@ -29,7 +29,7 @@ export default async function AdminCategoriesPage() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-lg border">
+      <div className="mt-6 overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>

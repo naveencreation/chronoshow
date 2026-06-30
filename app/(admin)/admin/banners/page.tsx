@@ -1,3 +1,6 @@
+import { EmptyState } from '@/components/shared/empty-state';
+import { Image } from 'lucide-react';
+
 export default function AdminBannersPage() {
   return (
     <div>
@@ -5,9 +8,11 @@ export default function AdminBannersPage() {
       <p className="mt-1 text-sm text-muted-foreground">
         Manage your homepage banners and promotions.
       </p>
-      <div className="mt-8 rounded-lg border p-8 text-center text-muted-foreground">
-        Banner management coming soon.
-      </div>
+      <EmptyState
+        icon={<Image className="h-12 w-12" />}
+        title="Banner Management"
+        description="Create and manage promotional banners for your storefront."
+      />
     </div>
   );
 }

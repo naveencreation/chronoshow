@@ -3,10 +3,12 @@ import { getProducts } from '@/lib/data/products';
 import { getCategories } from '@/lib/data/categories';
 import { getBrands } from '@/lib/data/brands';
 import { ProductCard } from '@/components/shop/product-card';
+import { HomeHero } from '@/components/shop/home-hero';
+import { AnimatedSection } from '@/components/shared/animated-section';
 import { ArrowRight } from 'lucide-react';
-import { siteConfig } from '@/config/site';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { siteConfig } from '@/config/site';
 
 export default async function HomePage() {
   let featuredProducts: Awaited<ReturnType<typeof getProducts>> = {
@@ -37,113 +39,162 @@ export default async function HomePage() {
     // Database not seeded — show empty gracefully
   }
 
+  const isEmpty = categories.length === 0 && featuredProducts.data.length === 0;
+
   return (
     <div>
-      <section className="bg-gradient-to-br from-primary/10 via-background to-primary/5 py-20 text-center">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">{siteConfig.name}</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            {siteConfig.tagline}
-          </p>
-          <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
-            {siteConfig.description}
-          </p>
-          <div className="mt-8 flex justify-center gap-4">
-            <Link href="/shop" className={buttonVariants({ size: 'lg' })}>
-              Shop Now
-            </Link>
-            <Link href="/categories" className={buttonVariants({ variant: 'outline', size: 'lg' })}>
-              Browse Categories
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HomeHero isEmpty={isEmpty} />
 
       {categories.length > 0 && (
-        <section className="container mx-auto px-4 py-16">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-2xl font-bold">Shop by Category</h2>
-            <Link href="/categories" className={cn(buttonVariants({ variant: 'ghost' }), 'gap-1')}>
-              View All <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {categories.map((cat) => (
-              <Link
-                key={cat.id}
-                href={`/categories/${cat.slug}`}
-                className="flex flex-col items-center rounded-lg border bg-card p-6 text-center transition-shadow hover:shadow-md"
-              >
-                <h3 className="font-semibold">{cat.name}</h3>
-                {cat.description && (
-                  <p className="mt-1 text-xs text-muted-foreground">{cat.description}</p>
-                )}
-              </Link>
-            ))}
-          </div>
-        </section>
+        <AnimatedSection>
+          <section className="section-padding bg-background">
+            <div className="mx-auto max-w-7xl px-4">
+              <SectionHeader label="Collection" title="Shop by Category" href="/categories" />
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                {categories.map((cat) => (
+                  <Link
+                    key={cat.id}
+                    href={`/categories/${cat.slug}`}
+                    className="group flex flex-col items-center rounded-xl border bg-card p-8 text-center shadow-sm transition-shadow hover:shadow-md"
+                  >
+                    <h3 className="font-semibold group-hover:text-gold transition-colors">
+                      {cat.name}
+                    </h3>
+                    {cat.description && (
+                      <p className="mt-1 text-xs text-muted-foreground">{cat.description}</p>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        </AnimatedSection>
       )}
 
       {featuredProducts.data.length > 0 && (
-        <section className="container mx-auto px-4 py-16">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-2xl font-bold">Featured Products</h2>
-            <Link href="/shop" className={cn(buttonVariants({ variant: 'ghost' }), 'gap-1')}>
-              View All <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {featuredProducts.data.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
+        <AnimatedSection>
+          <section className="section-padding bg-muted">
+            <div className="mx-auto max-w-7xl px-4">
+              <SectionHeader label="Curated" title="Featured Products" href="/shop" />
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
+                {featuredProducts.data.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+          </section>
+        </AnimatedSection>
       )}
 
       {newArrivals.data.length > 0 && (
-        <section className="container mx-auto px-4 py-16">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-2xl font-bold">New Arrivals</h2>
-            <Link
-              href="/new-arrivals"
-              className={cn(buttonVariants({ variant: 'ghost' }), 'gap-1')}
-            >
-              View All <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {newArrivals.data.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
+        <AnimatedSection>
+          <section className="section-padding bg-background">
+            <div className="mx-auto max-w-7xl px-4">
+              <SectionHeader label="Just Landed" title="New Arrivals" href="/new-arrivals" />
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
+                {newArrivals.data.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+          </section>
+        </AnimatedSection>
       )}
 
       {brands.length > 0 && (
-        <section className="container mx-auto px-4 py-16">
-          <h2 className="mb-8 text-2xl font-bold">Our Brands</h2>
-          <div className="flex flex-wrap items-center justify-center gap-8">
-            {brands.map((brand) => (
-              <Link
-                key={brand.id}
-                href={`/brands/${brand.slug}`}
-                className="rounded-lg border bg-card px-6 py-4 text-center font-semibold transition-shadow hover:shadow-md"
-              >
-                {brand.name}
-              </Link>
-            ))}
+        <AnimatedSection>
+          <section className="section-padding bg-muted">
+            <div className="mx-auto max-w-7xl px-4 text-center">
+              <p className="text-xs font-semibold uppercase tracking-wider text-gold">
+                Trusted Brands
+              </p>
+              <h2 className="mt-1 font-serif text-3xl font-bold md:text-4xl">Our Brands</h2>
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
+                {brands.map((brand) => (
+                  <Link
+                    key={brand.id}
+                    href={`/brands/${brand.slug}`}
+                    className="rounded-xl border bg-card px-8 py-6 text-center font-semibold shadow-sm transition-shadow hover:shadow-md"
+                  >
+                    {brand.logo_url ? (
+                      <img src={brand.logo_url} alt={brand.name} className="mx-auto h-12 w-auto" />
+                    ) : (
+                      brand.name
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        </AnimatedSection>
+      )}
+
+      <AnimatedSection>
+        <section className="section-padding bg-slate-900 text-white">
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-gold">Visit Us</p>
+                <h2 className="mt-1 font-serif text-3xl font-bold md:text-4xl">Our Store</h2>
+                <p className="mt-4 leading-relaxed text-slate-300">
+                  Visit our store to experience our collection in person. Our knowledgeable staff is
+                  ready to help you find the perfect timepiece.
+                </p>
+                <ul className="mt-6 space-y-3 text-slate-300">
+                  {siteConfig.contact.address && (
+                    <li className="flex items-start gap-2">
+                      <span className="mt-0.5 text-gold">📍</span>
+                      {siteConfig.contact.address}
+                    </li>
+                  )}
+                  {siteConfig.contact.phone && (
+                    <li className="flex items-center gap-2">
+                      <span className="text-gold">📞</span>
+                      {siteConfig.contact.phone}
+                    </li>
+                  )}
+                  {siteConfig.contact.businessHours && (
+                    <li className="flex items-start gap-2">
+                      <span className="mt-0.5 text-gold">🕐</span>
+                      {siteConfig.contact.businessHours}
+                    </li>
+                  )}
+                </ul>
+              </div>
+              <div className="flex items-center justify-center rounded-2xl bg-slate-800 p-8">
+                <p className="text-center text-sm text-slate-400">
+                  Google Maps will be embedded here once you configure your store address.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {isEmpty && (
+        <section className="section-padding bg-background text-center">
+          <div className="mx-auto max-w-md px-4">
+            <h2 className="font-serif text-2xl font-bold text-muted-foreground">Coming Soon</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Our catalog is being prepared. Check back soon for our latest collection.
+            </p>
           </div>
         </section>
       )}
+    </div>
+  );
+}
 
-      {categories.length === 0 && featuredProducts.data.length === 0 && (
-        <section className="container mx-auto px-4 py-20 text-center">
-          <h2 className="text-xl font-semibold text-muted-foreground">Coming Soon</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Our catalog is being prepared. Check back soon for our latest collection.
-          </p>
-        </section>
-      )}
+function SectionHeader({ label, title, href }: { label: string; title: string; href: string }) {
+  return (
+    <div className="mb-8 flex items-end justify-between">
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-wider text-gold">{label}</p>
+        <h2 className="mt-1 font-serif text-3xl font-bold md:text-4xl">{title}</h2>
+      </div>
+      <Link href={href} className={cn(buttonVariants({ variant: 'ghost' }), 'gap-1')}>
+        View All <ArrowRight className="h-4 w-4" />
+      </Link>
     </div>
   );
 }

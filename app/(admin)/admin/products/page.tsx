@@ -72,7 +72,7 @@ export default function AdminProductsPage() {
         />
       </div>
 
-      <div className="mt-4 rounded-lg border">
+      <div className="mt-4 overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>

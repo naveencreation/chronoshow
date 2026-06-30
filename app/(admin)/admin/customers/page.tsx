@@ -19,7 +19,7 @@ export default async function AdminCustomersPage() {
     <div>
       <h1 className="text-2xl font-bold">Customers</h1>
       <p className="mt-1 text-sm text-muted-foreground">{(customers || []).length} customers</p>
-      <div className="mt-6 rounded-lg border">
+      <div className="mt-6 overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>

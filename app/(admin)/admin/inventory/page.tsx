@@ -22,7 +22,7 @@ export default async function AdminInventoryPage() {
       <h1 className="text-2xl font-bold">Inventory</h1>
       <p className="mt-1 text-sm text-muted-foreground">{(products || []).length} products</p>
 
-      <div className="mt-6 rounded-lg border">
+      <div className="mt-6 overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>

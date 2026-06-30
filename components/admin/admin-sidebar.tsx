@@ -44,8 +44,8 @@ export function AdminSidebar() {
   const { signOut } = useAuth();
 
   return (
-    <aside className="flex w-64 flex-col border-r bg-card">
-      <div className="flex h-16 items-center border-b px-6">
+    <aside className="flex w-64 flex-col border-r border-border bg-card">
+      <div className="flex h-16 items-center border-b border-border px-6">
         <Logo size="sm" />
       </div>
 
@@ -59,10 +59,10 @@ export function AdminSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors border-l-2',
                 isActive
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                  ? 'border-primary bg-primary/10 text-primary'
+                  : 'border-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground'
               )}
             >
               {Icon && <Icon className="h-4 w-4" />}
@@ -72,7 +72,7 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      <div className="border-t p-3">
+      <div className="border-t border-border p-3">
         <Button variant="ghost" className="w-full justify-start gap-3" onClick={signOut}>
           <LogOut className="h-4 w-4" />
           Sign Out

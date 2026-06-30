@@ -1,3 +1,6 @@
+import { EmptyState } from '@/components/shared/empty-state';
+import { Percent } from 'lucide-react';
+
 export default function AdminOffersPage() {
   return (
     <div>
@@ -5,9 +8,11 @@ export default function AdminOffersPage() {
       <p className="mt-1 text-sm text-muted-foreground">
         Create and manage discount offers and promotions.
       </p>
-      <div className="mt-8 rounded-lg border p-8 text-center text-muted-foreground">
-        Offer management coming soon.
-      </div>
+      <EmptyState
+        icon={<Percent className="h-12 w-12" />}
+        title="Offer Management"
+        description="Set up seasonal sales, bundle deals, and special promotions."
+      />
     </div>
   );
 }

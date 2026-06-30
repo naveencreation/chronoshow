@@ -14,12 +14,12 @@ export function PriceDisplay({ sellingPrice, mrp, size = 'md', className }: Pric
 
   return (
     <div className={cn('flex items-baseline gap-2', className)}>
-      <span className={cn('font-bold', sizes[size])}>{formatPrice(sellingPrice)}</span>
+      <span className={cn('font-mono font-bold', sizes[size])}>{formatPrice(sellingPrice)}</span>
       {discount > 0 && (
         <>
           <span
             className={cn(
-              'text-muted-foreground line-through',
+              'font-mono text-muted-foreground line-through',
               size === 'lg' ? 'text-base' : 'text-sm'
             )}
           >

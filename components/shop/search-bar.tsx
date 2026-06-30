@@ -30,12 +30,13 @@ export function SearchBar({ onClose }: { onClose?: () => void }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full items-center gap-2">
+    <form onSubmit={handleSubmit} className="flex w-full items-center gap-2" role="search">
       <Search className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
       <Input
         ref={inputRef}
         type="search"
         placeholder="Search watches..."
+        aria-label="Search products"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}

@@ -21,6 +21,7 @@ import {
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, Save } from 'lucide-react';
+import { toast } from 'sonner';
 import Link from 'next/link';
 import type { Category, Brand } from '@/types';
 
@@ -82,13 +83,16 @@ export default function ProductForm({ initialData }: ProductFormProps) {
     try {
       if (initialData?.id) {
         await supabase.from('products').update(data).eq('id', initialData.id);
+        toast.success('Product updated successfully');
       } else {
         await supabase.from('products').insert(data);
+        toast.success('Product created successfully');
       }
       router.push('/admin/products');
       router.refresh();
     } catch (err) {
       console.error(err);
+      toast.error('Failed to save product. Please try again.');
     } finally {
       setSaving(false);
     }
@@ -143,6 +147,11 @@ export default function ProductForm({ initialData }: ProductFormProps) {
                       ))}
                     </SelectContent>
                   </Select>
+                  {form.formState.errors.brand_id && (
+                    <p className="mt-1 text-xs text-destructive">
+                      {form.formState.errors.brand_id.message}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <Label>Category</Label>
@@ -161,6 +170,11 @@ export default function ProductForm({ initialData }: ProductFormProps) {
                       ))}
                     </SelectContent>
                   </Select>
+                  {form.formState.errors.category_id && (
+                    <p className="mt-1 text-xs text-destructive">
+                      {form.formState.errors.category_id.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -183,6 +197,11 @@ export default function ProductForm({ initialData }: ProductFormProps) {
                     {...form.register('mrp', { valueAsNumber: true })}
                     className="mt-1"
                   />
+                  {form.formState.errors.mrp && (
+                    <p className="mt-1 text-xs text-destructive">
+                      {form.formState.errors.mrp.message}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="selling_price">Selling Price (₹)</Label>
@@ -192,6 +211,11 @@ export default function ProductForm({ initialData }: ProductFormProps) {
                     {...form.register('selling_price', { valueAsNumber: true })}
                     className="mt-1"
                   />
+                  {form.formState.errors.selling_price && (
+                    <p className="mt-1 text-xs text-destructive">
+                      {form.formState.errors.selling_price.message}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="stock_quantity">Stock Qty</Label>
@@ -201,6 +225,11 @@ export default function ProductForm({ initialData }: ProductFormProps) {
                     {...form.register('stock_quantity', { valueAsNumber: true })}
                     className="mt-1"
                   />
+                  {form.formState.errors.stock_quantity && (
+                    <p className="mt-1 text-xs text-destructive">
+                      {form.formState.errors.stock_quantity.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
